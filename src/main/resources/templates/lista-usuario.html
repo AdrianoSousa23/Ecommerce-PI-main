@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="lista-usuarios.css">
+    <title>Lista de Usuários</title>
+</head>
+<body>
+<header class="title">
+    <h1>
+        Lista de Usuários
+    </h1>
+</header>
+
+<div class="container">
+    <input type="text" id="inputBusca">
+    <button class="btn-usuarios" onclick="buscarUsuarios()">
+        Procurar
+    </button>
+    <button class="btn-cadastrar-usuario">
+        Cadastrar Usuário
+    </button>
+
+    <!-- Tabela para exibir os usuários -->
+    <table class="tabela-usuarios">
+        <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Status</th>
+            <th>Ações</th>
+        </tr>
+        </thead>
+        <tbody id="tabelaCorpo">
+        <!-- Aqui serão listados os usuários -->
+        <tr>
+            <td>Nome do usuário</td>
+            <td>email@example.com</td>
+            <td>Ativo</td>
+            <td>
+                <button class="btn-alterar-usuario">Alterar</button>
+            </td>
+        </tr>
+        <!-- Adicione mais linhas conforme necessário -->
+        </tbody>
+    </table>
+</div>
+
+<script>
+    function buscarUsuarios() {
+        // Obter o valor digitado no campo de entrada
+        var termoBusca = document.getElementById("inputBusca").value.toLowerCase();
+        var linhasTabela = document.getElementById("tabelaCorpo").getElementsByTagName("tr");
+
+        // Iterar sobre as linhas da tabela
+        for (var i = 0; i < linhasTabela.length; i++) {
+            var colunaNome = linhasTabela[i].getElementsByTagName("td")[0];
+            if (colunaNome) {
+                var textoNome = colunaNome.textContent || colunaNome.innerText;
+                // Verificar se o nome da linha contém o termo de busca
+                if (textoNome.toLowerCase().indexOf(termoBusca) > -1) {
+                    linhasTabela[i].style.display = "";
+                } else {
+                    linhasTabela[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>
+
+</body>
+</html>
